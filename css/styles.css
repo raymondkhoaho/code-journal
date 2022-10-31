@@ -3,11 +3,21 @@ body {
 }
 
 header {
-  color: white;
   background-color: #562b81;
+}
+
+header h3 {
+  color: white;
   font-family: "Proza Libre", Barlow, sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   letter-spacing: 0.05rem;
+}
+
+h1 {
+  font-family: "Proza Libre", Barlow, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 2.5rem;
 }
 
 img {
