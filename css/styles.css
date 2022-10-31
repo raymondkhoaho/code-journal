@@ -1,5 +1,6 @@
 body {
   background-color: #f0f0f0;
+  font-family: Barlow, sans-serif;
 }
 
 header {
@@ -8,7 +9,6 @@ header {
 
 header h3 {
   color: white;
-  font-family: "Proza Libre", Barlow, sans-serif;
   font-weight: 400;
   letter-spacing: 0.05rem;
 }
@@ -23,6 +23,7 @@ h1 {
 img {
   width: 100%;
   margin-bottom: 20px;
+  border-radius: 4px;
 }
 
 label {
@@ -45,16 +46,16 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border: 3px solid #562b81;
+  border: 2.5px solid #562b81;
 }
 
 button {
   color: white;
   background-color: #562b81;
-  padding: 10px 15px;
+  padding: 7px 15px;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .flex-align-end {
