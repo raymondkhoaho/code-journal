@@ -17,8 +17,9 @@ function submitEvent(event) {
   formObject.title = $submitForm.elements.title.value;
   formObject.photoUrl = $submitForm.elements['photo-url'].value;
   formObject.notes = $submitForm.elements.notes.value;
-  formObject.EntryId = data.nextEntryId++;
-  data.entries.push(formObject);
+  formObject.entryId = data.nextEntryId;
+  data.nextEntryId++;
+  data.entries.unshift(formObject);
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
 }
