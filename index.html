@@ -22,14 +22,15 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="column-full">
-          <h3>Code Journal</h3>
+        <div class="column-full tab-container flex-display">
+          <h3 class="tab" data-view="entry-form">Code Journal</h3>
+          <h4 class="tab" data-view="entries">Entries</h4>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div class="container" data-view="entry-form">
+    <div class="container hidden" data-view="entry-form">
       <form class="entry-form">
         <div class="row">
           <div class="column-full">
@@ -67,7 +68,46 @@
       </form>
     </div>
     <!-- View An Entry -->
-    <div class="container" data-view="entries"></div>
+    <div class="container" data-view="entries">
+      <div class="row">
+        <div class="column-full flex-display row-between-center">
+          <h1>Entries</h1>
+          <button class="new-button">NEW</button>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li>
+            <div class="row">
+              <div class="column-half">
+                <img src="https://daily.jstor.org/wp-content/uploads/2019/10/ada_lovelace_pioneer_1050x700.jpg">
+              </div>
+              <div class="column-half">
+                <h2>Ada Lovelace</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolores nisi nobis vitae at eos, reprehenderit quod neque libero. Autem distinctio nulla facere culpa omnis est esse quod, voluptate ab?</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est rem vitae facilis quasi voluptas exercitationem quisquam esse beatae, laborum eos incidunt quia veniam, magnam, repellat nam corrupti labore suscipit. Ab!</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="column-half">
+                <img src="https://daily.jstor.org/wp-content/uploads/2019/10/ada_lovelace_pioneer_1050x700.jpg">
+              </div>
+              <div class="column-half">
+                <h2>Ada Lovelace</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolores nisi nobis vitae at eos, reprehenderit
+                  quod neque libero. Autem distinctio nulla facere culpa omnis est esse quod, voluptate ab?</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est rem vitae facilis quasi voluptas exercitationem
+                  quisquam esse beatae, laborum eos incidunt quia veniam, magnam, repellat nam corrupti labore suscipit. Ab!</p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

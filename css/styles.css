@@ -67,3 +67,38 @@ button {
   display: flex;
   justify-content: flex-end;
 }
+
+.flex-display {
+  display: flex;
+}
+
+h4 {
+  text-decoration: none;
+  padding: 0 20px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.row-between-center {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul h2 {
+  margin-top: 0;
+}
+
+li {
+  margin: 0 0 30px;
+}
