@@ -17,6 +17,7 @@ function submitEvent(event) {
   data.entries.unshift(formObject);
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
+  clickFunction();
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
@@ -56,10 +57,17 @@ function renderEntry(entry) {
 
 var $ulParent = document.querySelector('.entry');
 
-for (var i = 0; i < data.entries.length; i++) {
-  var entry = renderEntry(data.entries[i]);
-  $ulParent.appendChild(entry);
+function domLoaded(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var entry = renderEntry(data.entries[i]);
+    $ulParent.appendChild(entry);
+  }
 }
+
+document.addEventListener('DOMContentLoaded', domLoaded);
+
+// view swapping
+
 var $tabContainer = document.querySelector('.tab-container');
 var $viewNodes = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
