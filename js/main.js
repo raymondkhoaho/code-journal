@@ -1,6 +1,8 @@
 var $imageInput = document.querySelector('.photoUrl');
 var $imgView = document.querySelector('.images');
 var $submitForm = document.querySelector('.entry-form');
+var $entriesView = document.querySelector('#entriesView');
+var $formView = document.querySelector('#formView');
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
@@ -17,7 +19,9 @@ function submitEvent(event) {
   data.entries.unshift(formObject);
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
-  clickFunction();
+
+  $formView.setAttribute('class', 'view container hidden');
+  $entriesView.setAttribute('class', 'view container');
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
