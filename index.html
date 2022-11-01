@@ -23,14 +23,14 @@
     <div class="container">
       <div class="row">
         <div class="column-full tab-container flex-display">
-          <h3 class="tab" data-view="entry-form">Code Journal</h3>
-          <h4 class="tab" data-view="entries"><a href="#">Entries</a></h4>
+          <h3><a class="tab" data-view="entry-form" href="#">Code Journal</a></h3>
+          <h4><a class="tab" data-view="entries" href="#">Entries</a></h4>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div class="container hidden" data-view="entry-form">
+    <div class="view container" data-view="entry-form">
       <form class="entry-form">
         <div class="row">
           <div class="column-full">
@@ -68,41 +68,17 @@
       </form>
     </div>
     <!-- View An Entry -->
-    <div class="container" data-view="entries">
+    <div class="view container hidden" data-view="entries">
       <div class="row">
         <div class="column-full flex-display between-center">
           <h1>Entries</h1>
-          <a href="#" class="new-button">NEW</a>
+          <div class="tab-container">
+            <a class="tab new-button" data-view="entry-form" href="#">NEW</a>
+          </div>
         </div>
       </div>
       <div>
         <ul class="entry">
-          <li>
-            <div class="row">
-              <div class="column-half">
-                <img src="https://daily.jstor.org/wp-content/uploads/2019/10/ada_lovelace_pioneer_1050x700.jpg">
-              </div>
-              <div class="column-half entry-text">
-                <h2>Ada Lovelace</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolores nisi nobis vitae at eos, reprehenderit quod neque libero. Autem distinctio nulla facere culpa omnis est esse quod, voluptate ab?</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est rem vitae facilis quasi voluptas exercitationem quisquam esse beatae, laborum eos incidunt quia veniam, magnam, repellat nam corrupti labore suscipit. Ab!</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="column-half">
-                <img src="https://media.istockphoto.com/photos/programming-source-code-abstract-background-picture-id1047259374?b=1&k=20&m=1047259374&s=170667a&w=0&h=6ER4n81WAjZ-1X-RQwbhJcSeNGiqGJLLdawL1xLIWl0=">
-              </div>
-              <div class="column-half">
-                <h2>JavaScript</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolores nisi nobis vitae at eos, reprehenderit
-                  quod neque libero. Autem distinctio nulla facere culpa omnis est esse quod, voluptate ab?</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est rem vitae facilis quasi voluptas exercitationem
-                  quisquam esse beatae, laborum eos incidunt quia veniam, magnam, repellat nam corrupti labore suscipit. Ab!</p>
-              </div>
-            </div>
-          </li>
 
         </ul>
       </div>

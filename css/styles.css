@@ -7,7 +7,8 @@ header {
   background-color: #562b81;
 }
 
-header h3 {
+header a {
+  text-decoration: none;
   color: white;
   font-weight: 400;
   letter-spacing: 0.05rem;
@@ -110,4 +111,8 @@ li {
   border: none;
   border-radius: 4px;
   font-size: 1rem;
+}
+
+p {
+  word-wrap: break-word;
 }

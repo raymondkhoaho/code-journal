@@ -60,18 +60,22 @@ for (var i = 0; i < data.entries.length; i++) {
   var entry = renderEntry(data.entries[i]);
   $ulParent.appendChild(entry);
 }
+var $tabContainer = document.querySelector('.tab-container');
+var $viewNodes = document.querySelectorAll('.view');
+var $newButton = document.querySelector('.new-button');
 
-/*
-<li>
-  <div class="row">
-    <div class="column-half">
-      <img src="https://daily.jstor.org/wp-content/uploads/2019/10/ada_lovelace_pioneer_1050x700.jpg">
-    </div>
-    <div class="column-half">
-      <h2>Ada Lovelace</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolores nisi nobis vitae at eos, reprehenderit quod neque libero. Autem distinctio nulla facere culpa omnis est esse quod, voluptate ab?</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est rem vitae facilis quasi voluptas exercitationem quisquam esse beatae, laborum eos incidunt quia veniam, magnam, repellat nam corrupti labore suscipit. Ab!</p>
-    </div>
-  </div>
-</li>
-*/
+function clickFunction(event) {
+  if (event.target.matches('.tab')) {
+    var $dataView = event.target.getAttribute('data-view');
+    for (var i = 0; i < $viewNodes.length; i++) {
+      if ($viewNodes[i].getAttribute('data-view') === $dataView) {
+        $viewNodes[i].setAttribute('class', 'view container');
+      } else {
+        $viewNodes[i].setAttribute('class', 'view container hidden');
+      }
+    }
+  }
+}
+
+$tabContainer.addEventListener('click', clickFunction);
+$newButton.addEventListener('click', clickFunction);
