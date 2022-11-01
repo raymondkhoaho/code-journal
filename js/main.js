@@ -9,6 +9,7 @@ function photoUrlInput(event) {
 }
 
 function submitEvent(event) {
+  // debugger;
   var formObject = {};
   event.preventDefault();
   formObject.title = $submitForm.elements.title.value;
@@ -20,12 +21,21 @@ function submitEvent(event) {
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
 
+  prependDom(formObject);
+
   $formView.setAttribute('class', 'view container hidden');
   $entriesView.setAttribute('class', 'view container');
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
 $submitForm.addEventListener('submit', submitEvent);
+
+// prepend to dom
+
+function prependDom(formObject) {
+  var newLi = renderEntry(formObject);
+  $ulParent.prepend(newLi);
+}
 
 // DOM tree for list item
 
