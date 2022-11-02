@@ -27,7 +27,6 @@ function submitEvent(event) {
   var newLi = renderEntry(formObject);
   $ulParent.prepend(newLi);
   viewSwap(event);
-  // clickFunction(event);
 }
 
 $submitForm.addEventListener('submit', submitEvent);
@@ -64,7 +63,7 @@ function renderEntry(entry) {
   return entryLi;
 }
 
-// DOM Content Loaded Event and DOM Tree Loop
+// DOM Content Loaded Event: DOM Tree Loop and Reload Page
 
 var $ulParent = document.querySelector('.entry');
 
@@ -73,6 +72,7 @@ function DOMContentLoaded(event) {
     var entry = renderEntry(data.entries[i]);
     $ulParent.appendChild(entry);
   }
+
   if (data.view === 'entries') {
     $viewNodes[0].setAttribute('class', 'view container hidden');
     $viewNodes[1].setAttribute('class', 'view container');
