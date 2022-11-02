@@ -1,16 +1,20 @@
+// Photo Preview function
+
 var $imageInput = document.querySelector('.photoUrl');
 var $imgView = document.querySelector('.images');
-var $submitForm = document.querySelector('.entry-form');
-var $entriesView = document.querySelector('#entriesView');
-var $formView = document.querySelector('#formView');
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
 }
 
+$imageInput.addEventListener('input', photoUrlInput);
+
+// Submit Form Event
+var $submitForm = document.querySelector('.entry-form');
+
 function submitEvent(event) {
-  // debugger;
   var formObject = {};
+
   event.preventDefault();
   formObject.title = $submitForm.elements.title.value;
   formObject.photoUrl = $submitForm.elements['photo-url'].value;
@@ -20,24 +24,15 @@ function submitEvent(event) {
   data.entries.unshift(formObject);
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
-
-  prependDom(formObject);
-
-  $formView.setAttribute('class', 'view container hidden');
-  $entriesView.setAttribute('class', 'view container');
-}
-
-$imageInput.addEventListener('input', photoUrlInput);
-$submitForm.addEventListener('submit', submitEvent);
-
-// prepend to dom
-
-function prependDom(formObject) {
   var newLi = renderEntry(formObject);
   $ulParent.prepend(newLi);
+  viewSwap(event);
+  // clickFunction(event);
 }
 
-// DOM tree for list item
+$submitForm.addEventListener('submit', submitEvent);
+
+// Create DOM Tree Function
 
 function renderEntry(entry) {
   var entryLi = document.createElement('li');
@@ -69,26 +64,30 @@ function renderEntry(entry) {
   return entryLi;
 }
 
+// DOM Content Loaded Event and DOM Tree Loop
+
 var $ulParent = document.querySelector('.entry');
 
-function domLoaded(event) {
+function DOMContentLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var entry = renderEntry(data.entries[i]);
     $ulParent.appendChild(entry);
   }
+  if (data.view === 'entries') {
+    $viewNodes[0].setAttribute('class', 'view container hidden');
+    $viewNodes[1].setAttribute('class', 'view container');
+  }
 }
 
-document.addEventListener('DOMContentLoaded', domLoaded);
+document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 
-// view swapping
+// View Swapping Function/Loop
 
-var $tabContainer = document.querySelector('.tab-container');
 var $viewNodes = document.querySelectorAll('.view');
-var $newButton = document.querySelector('.new-button');
 
-function clickFunction(event) {
+function viewSwap(event) {
+  var $dataView = event.target.getAttribute('data-view');
   if (event.target.matches('.tab')) {
-    var $dataView = event.target.getAttribute('data-view');
     for (var i = 0; i < $viewNodes.length; i++) {
       if ($viewNodes[i].getAttribute('data-view') === $dataView) {
         $viewNodes[i].setAttribute('class', 'view container');
@@ -96,8 +95,8 @@ function clickFunction(event) {
         $viewNodes[i].setAttribute('class', 'view container hidden');
       }
     }
+    data.view = $dataView;
   }
 }
 
-$tabContainer.addEventListener('click', clickFunction);
-$newButton.addEventListener('click', clickFunction);
+document.addEventListener('click', viewSwap);

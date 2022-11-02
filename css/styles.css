@@ -7,7 +7,8 @@ header {
   background-color: #562b81;
 }
 
-header a {
+header a,
+header h3 {
   text-decoration: none;
   color: white;
   font-weight: 400;
@@ -55,15 +56,6 @@ textarea:focus {
   border: 2.5px solid #562b81;
 }
 
-button {
-  color: white;
-  background-color: #562b81;
-  padding: 7px 15px;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
 .flex-align-end {
   display: flex;
   justify-content: flex-end;
@@ -103,6 +95,7 @@ li {
   margin: 0 0 30px;
 }
 
+button,
 .new-button {
   text-decoration: none;
   color: white;

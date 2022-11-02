@@ -22,16 +22,16 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="column-full tab-container flex-display">
-          <h3><a class="tab" data-view="entry-form" href="#">Code Journal</a></h3>
+        <div class="column-full flex-display">
+          <h3>Code Journal</h3>
           <h4><a class="tab" data-view="entries" href="#">Entries</a></h4>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div id="formView" class="view container" data-view="entry-form">
-      <form class="entry-form" action="">
+    <div class="view container" data-view="entry-form">
+      <form class="entry-form tab" data-view="entries">
         <div class="row">
           <div class="column-full">
             <h1>New Entry</h1>
@@ -62,27 +62,25 @@
         </div>
         <div class="row">
           <div class="column-full flex-align-end">
-            <button class="tab submit-button" data-view="entries">SAVE</button>
+            <button>SAVE</button>
           </div>
         </div>
       </form>
     </div>
     <!-- View An Entry -->
-    <div id="entriesView" class="view container hidden" data-view="entries">
+    <div class="view container hidden" data-view="entries">
       <div class="row">
         <div class="column-full flex-display between-center">
           <h1>Entries</h1>
-          <div class="tab-container">
-            <a class="tab new-button" data-view="entry-form" href="#">NEW</a>
+          <div>
+            <a class="new-button tab" data-view="entry-form" href="#">NEW</a>
           </div>
         </div>
       </div>
       <div>
         <ul class="entry">
-
         </ul>
       </div>
-
     </div>
   </main>
   <script src="js/data.js"></script>
