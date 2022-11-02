@@ -117,6 +117,9 @@ var $entriesAnchor = document.querySelector('.entries-link');
 function clickAnchor(event) {
   var viewSwapInput = event.target.getAttribute('data-view');
   viewSwap(viewSwapInput);
+  if (viewSwapInput === 'entry-form') {
+    h1Text.textContent = 'New Entry';
+  }
 }
 
 $newAnchor.addEventListener('click', clickAnchor);
@@ -124,10 +127,12 @@ $entriesAnchor.addEventListener('click', clickAnchor);
 
 // Click function for entry parent element
 // var $editAnchor = document.querySelector('.edit-icon');
+var h1Text = document.querySelector('.entry-heading');
 
 function editClick(event) {
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
+    h1Text.textContent = 'Edit Entry';
   }
 }
 
