@@ -26,7 +26,7 @@ function submitEvent(event) {
   $submitForm.reset();
   var newLi = renderEntry(formObject);
   $ulParent.prepend(newLi);
-  viewSwap(event);
+  viewSwap('entries');
 }
 
 $submitForm.addEventListener('submit', submitEvent);
@@ -81,22 +81,28 @@ function DOMContentLoaded(event) {
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 
-// View Swapping Function/Loop
+// View Swap and Click Function
 
 var $viewNodes = document.querySelectorAll('.view');
 
-function viewSwap(event) {
-  var $dataView = event.target.getAttribute('data-view');
-  if (event.target.matches('.tab')) {
-    for (var i = 0; i < $viewNodes.length; i++) {
-      if ($viewNodes[i].getAttribute('data-view') === $dataView) {
-        $viewNodes[i].setAttribute('class', 'view container');
-      } else {
-        $viewNodes[i].setAttribute('class', 'view container hidden');
-      }
+function viewSwap(showView) {
+  for (var i = 0; i < $viewNodes.length; i++) {
+    if ($viewNodes[i].getAttribute('data-view') === showView) {
+      $viewNodes[i].setAttribute('class', 'view container');
+    } else {
+      $viewNodes[i].setAttribute('class', 'view container hidden');
     }
-    data.view = $dataView;
   }
+  data.view = showView;
 }
 
-document.addEventListener('click', viewSwap);
+var $newAnchor = document.querySelector('.new-button');
+var $entriesAnchor = document.querySelector('.entries-link');
+
+function clickAnchor(event) {
+  var viewSwapInput = event.target.getAttribute('data-view');
+  viewSwap(viewSwapInput);
+}
+
+$newAnchor.addEventListener('click', clickAnchor);
+$entriesAnchor.addEventListener('click', clickAnchor);
