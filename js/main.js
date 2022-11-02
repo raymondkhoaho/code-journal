@@ -142,5 +142,11 @@ function editClick(event) {
       break;
     }
   }
+  var $textEdit = document.querySelector('#title');
+  var $notesEdit = document.querySelector('#notes');
+  $imgView.setAttribute('src', data.editing.photoUrl);
+  $textEdit.setAttribute('value', data.editing.title);
+  $imageInput.setAttribute('value', data.editing.photoUrl);
+  $notesEdit.textContent = data.editing.notes;
 }
 $ulParent.addEventListener('click', editClick);
