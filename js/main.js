@@ -52,9 +52,22 @@ function renderEntry(entry) {
   columnTextDiv.setAttribute('class', 'column-half');
   rowDiv.appendChild(columnTextDiv);
 
+  var rowTextDiv = document.createElement('div');
+  rowTextDiv.setAttribute('class', 'row between-center');
+  columnTextDiv.appendChild(rowTextDiv);
+
   var newH2 = document.createElement('h2');
   newH2.textContent = entry.title;
-  columnTextDiv.appendChild(newH2);
+  rowTextDiv.appendChild(newH2);
+
+  var newA = document.createElement('a');
+  newA.setAttribute('class', 'edit-icon');
+  newA.setAttribute('href', '#');
+  rowTextDiv.appendChild(newA);
+
+  var newIcon = document.createElement('i');
+  newIcon.setAttribute('class', 'fa-solid fa-pen');
+  newA.appendChild(newIcon);
 
   var newP = document.createElement('p');
   newP.textContent = entry.notes;
