@@ -125,8 +125,8 @@ function clickAnchor(event) {
 $newAnchor.addEventListener('click', clickAnchor);
 $entriesAnchor.addEventListener('click', clickAnchor);
 
-// Click function for entry parent element
-// var $editAnchor = document.querySelector('.edit-icon');
+// View Edit Form
+
 var h1Text = document.querySelector('.entry-heading');
 
 function editClick(event) {
@@ -134,6 +134,13 @@ function editClick(event) {
     viewSwap('entry-form');
     h1Text.textContent = 'Edit Entry';
   }
+  var closestLi = event.target.closest('li');
+  var liEntryId = closestLi.getAttribute('data-entry-id');
+  for (var j = 0; j < data.entries.length; j++) {
+    if (data.entries[j].entryId.toString() === liEntryId) {
+      data.editing = data.entries[j];
+      break;
+    }
+  }
 }
-
 $ulParent.addEventListener('click', editClick);
