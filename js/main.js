@@ -25,6 +25,7 @@ function submitEvent(event) {
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
   var newLi = renderEntry(formObject);
+  newLi.setAttribute('data-entry-id', formObject.entryId);
   $ulParent.prepend(newLi);
   viewSwap('entries');
 }
@@ -83,6 +84,7 @@ var $ulParent = document.querySelector('.entry');
 function DOMContentLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var entry = renderEntry(data.entries[i]);
+    entry.setAttribute('data-entry-id', data.entries[i].entryId);
     $ulParent.appendChild(entry);
   }
 
