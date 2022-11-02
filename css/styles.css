@@ -7,7 +7,9 @@ header {
   background-color: #562b81;
 }
 
+header a,
 header h3 {
+  text-decoration: none;
   color: white;
   font-weight: 400;
   letter-spacing: 0.05rem;
@@ -54,7 +56,48 @@ textarea:focus {
   border: 2.5px solid #562b81;
 }
 
-button {
+.flex-align-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-display {
+  display: flex;
+}
+
+h4 a {
+  text-decoration: none;
+  padding: 0 20px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.between-center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul h2 {
+  margin-top: 0;
+}
+
+li {
+  margin: 0 0 30px;
+}
+
+button,
+.new-button {
+  text-decoration: none;
   color: white;
   background-color: #562b81;
   padding: 7px 15px;
@@ -63,7 +106,6 @@ button {
   font-size: 1rem;
 }
 
-.flex-align-end {
-  display: flex;
-  justify-content: flex-end;
+p {
+  word-wrap: break-word;
 }
