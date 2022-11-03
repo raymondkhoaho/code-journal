@@ -12,7 +12,6 @@ var $confirmButton = document.querySelector('.confirm-button');
 var $cancelButton = document.querySelector('.cancel-button');
 var $modal = document.querySelector('.modal');
 var $overlay = document.querySelector('.overlay');
-var $liNodes = document.querySelectorAll('li');
 
 // Photo Preview function
 
@@ -49,7 +48,7 @@ function submitEvent(event) {
         break;
       }
     }
-
+    var $liNodes = document.querySelectorAll('li');
     var replaceLi = renderEntry(formObject);
     for (var l = 0; l < $liNodes.length; l++) {
       if ($liNodes[l].getAttribute('data-entry-id') === formObject.entryId.toString()) {
@@ -61,6 +60,7 @@ function submitEvent(event) {
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
   viewSwap('entries');
+  data.editing = null;
 }
 
 $submitForm.addEventListener('submit', submitEvent);
@@ -202,21 +202,17 @@ function deleteFunction(event) {
       break;
     }
   }
+  var $liNodes = document.querySelectorAll('li');
   for (var n = 0; n < $liNodes.length; n++) {
-    if ($liNodes[n].getAttribute('data-entry-id') === data.editing.entryId) {
+    if ($liNodes[n].getAttribute('data-entry-id') === data.editing.entryId.toString()) {
       $liNodes[n].remove();
+      break;
     }
   }
-  viewSwap('entries');
   closeModal();
-  DOMContentLoaded();
+  viewSwap('entries');
 }
 
 $deleteButton.addEventListener('click', openModal);
 $cancelButton.addEventListener('click', closeModal);
 $confirmButton.addEventListener('click', deleteFunction);
-
-// for (var l = 0; l < $liNodes.length; l++) {
-//   if ($liNodes[l].getAttribute('data-entry-id') === formObject.entryId.toString()) {
-//     $liNodes[l].replaceWith(replaceLi);
-//     break;
