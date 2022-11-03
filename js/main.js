@@ -9,6 +9,10 @@ var $ulParent = document.querySelector('.entry');
 var $newAnchor = document.querySelector('.new-button');
 var $entriesAnchor = document.querySelector('.entries-link');
 var $deleteButton = document.querySelector('.delete-button');
+// var $confirmButton = document.querySelector('.confirm-button');
+var $cancelButton = document.querySelector('.cancel-button');
+var $modal = document.querySelector('.modal');
+var $overlay = document.querySelector('.overlay');
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
@@ -155,7 +159,6 @@ $entriesAnchor.addEventListener('click', clickAnchor);
 // View Pre-populated Edit Form
 
 function editClick(event) {
-  // debugger;
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
     h1Text.textContent = 'Edit Entry';
@@ -176,3 +179,18 @@ function editClick(event) {
 }
 
 $ulParent.addEventListener('click', editClick);
+
+// Delete Entry Function
+
+function openModal(event) {
+  $modal.setAttribute('class', 'modal');
+  $overlay.setAttribute('class', 'overlay');
+}
+
+function closeModal(event) {
+  $modal.setAttribute('class', 'modal hidden');
+  $overlay.setAttribute('class', 'overlay hidden');
+}
+
+$deleteButton.addEventListener('click', openModal);
+$cancelButton.addEventListener('click', closeModal);
