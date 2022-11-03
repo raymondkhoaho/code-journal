@@ -113,3 +113,15 @@ p {
 i {
   font-size: 1.5rem;
 }
+
+.delete-button {
+  text-decoration: underline;
+  border: none;
+  background: none;
+  color: #dc2626;
+  padding: 0;
+}
+
+.invisible {
+  visibility: hidden;
+}

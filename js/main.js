@@ -8,6 +8,7 @@ var h1Text = document.querySelector('.entry-heading');
 var $ulParent = document.querySelector('.entry');
 var $newAnchor = document.querySelector('.new-button');
 var $entriesAnchor = document.querySelector('.entries-link');
+var $deleteButton = document.querySelector('.delete-button');
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
@@ -53,7 +54,6 @@ function submitEvent(event) {
   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
   $submitForm.reset();
   viewSwap('entries');
-  data.editing = null;
 }
 
 $submitForm.addEventListener('submit', submitEvent);
@@ -116,7 +116,6 @@ function DOMContentLoaded(event) {
     $viewNodes[0].setAttribute('class', 'view container hidden');
     $viewNodes[1].setAttribute('class', 'view container');
   }
-  data.editing = null;
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
@@ -133,21 +132,20 @@ function viewSwap(showView) {
       $viewNodes[i].setAttribute('class', 'view container hidden');
     }
   }
-  data.editing = null;
   data.view = showView;
 }
 
 function clickAnchor(event) {
-  $submitForm.reset();
   var viewSwapInput = event.target.getAttribute('data-view');
-  data.editing = null;
   if (viewSwapInput === 'entry-form') {
     h1Text.textContent = 'New Entry';
     $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
     $textEdit.setAttribute('value', '');
     $imageInput.setAttribute('value', '');
     $notesEdit.textContent = '';
+    $deleteButton.setAttribute('class', 'delete-button invisible');
   }
+  data.editing = null;
   viewSwap(viewSwapInput);
 }
 
@@ -171,6 +169,7 @@ function editClick(event) {
       $textEdit.setAttribute('value', data.editing.title);
       $imageInput.setAttribute('value', data.editing.photoUrl);
       $notesEdit.textContent = data.editing.notes;
+      $deleteButton.setAttribute('class', 'delete-button');
       break;
     }
   }
