@@ -19,6 +19,18 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class>
+  <div class="overlay hidden"></div>
+  <div class="modal hidden">
+    <h3>Are you sure you want to delete this entry?</h3>
+    <div class="column-gap">
+      <div>
+        <button class="cancel-button">CANCEL</button>
+      </div>
+      <div>
+        <button class="confirm-button">CONFIRM</button>
+      </div>
+    </div>
+  </div>
   <header>
     <div class="container">
       <div class="row">
@@ -61,8 +73,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="column-full flex-align-end">
-            <button>SAVE</button>
+          <div class="column-full flex-display between-center">
+            <button type="button" class="delete-button invisible">Delete Entry</button>
+            <button class="save-button">SAVE</button>
           </div>
         </div>
       </form>
@@ -78,9 +91,6 @@
         </div>
       </div>
       <div>
-        <div class="no-entries hidden">
-          <p>No entries have been recorded.</p>
-        </div>
         <ul class="entry">
         </ul>
       </div>

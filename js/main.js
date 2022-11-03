@@ -1,4 +1,3 @@
-// Photo Preview function
 
 var $imageInput = document.querySelector('.photoUrl');
 var $imgView = document.querySelector('.images');
@@ -8,12 +7,20 @@ var h1Text = document.querySelector('.entry-heading');
 var $ulParent = document.querySelector('.entry');
 var $newAnchor = document.querySelector('.new-button');
 var $entriesAnchor = document.querySelector('.entries-link');
+var $deleteButton = document.querySelector('.delete-button');
+var $confirmButton = document.querySelector('.confirm-button');
+var $cancelButton = document.querySelector('.cancel-button');
+var $modal = document.querySelector('.modal');
+var $overlay = document.querySelector('.overlay');
+
+// Photo Preview function
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
+
 // Submit New/Edited Form Event
 
 var $submitForm = document.querySelector('.entry-form');
@@ -116,7 +123,6 @@ function DOMContentLoaded(event) {
     $viewNodes[0].setAttribute('class', 'view container hidden');
     $viewNodes[1].setAttribute('class', 'view container');
   }
-  data.editing = null;
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
@@ -133,21 +139,20 @@ function viewSwap(showView) {
       $viewNodes[i].setAttribute('class', 'view container hidden');
     }
   }
-  data.editing = null;
   data.view = showView;
 }
 
 function clickAnchor(event) {
-  $submitForm.reset();
   var viewSwapInput = event.target.getAttribute('data-view');
-  data.editing = null;
   if (viewSwapInput === 'entry-form') {
     h1Text.textContent = 'New Entry';
     $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
     $textEdit.setAttribute('value', '');
     $imageInput.setAttribute('value', '');
     $notesEdit.textContent = '';
+    $deleteButton.setAttribute('class', 'delete-button invisible');
   }
+  data.editing = null;
   viewSwap(viewSwapInput);
 }
 
@@ -157,7 +162,6 @@ $entriesAnchor.addEventListener('click', clickAnchor);
 // View Pre-populated Edit Form
 
 function editClick(event) {
-  // debugger;
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
     h1Text.textContent = 'Edit Entry';
@@ -171,9 +175,44 @@ function editClick(event) {
       $textEdit.setAttribute('value', data.editing.title);
       $imageInput.setAttribute('value', data.editing.photoUrl);
       $notesEdit.textContent = data.editing.notes;
+      $deleteButton.setAttribute('class', 'delete-button');
       break;
     }
   }
 }
 
 $ulParent.addEventListener('click', editClick);
+
+// Open/Close Delete Modal, Delete Entry Function
+
+function openModal(event) {
+  $modal.setAttribute('class', 'modal');
+  $overlay.setAttribute('class', 'overlay');
+}
+
+function closeModal(event) {
+  $modal.setAttribute('class', 'modal hidden');
+  $overlay.setAttribute('class', 'overlay hidden');
+}
+
+function deleteFunction(event) {
+  for (var m = 0; m < data.entries.length; m++) {
+    if (data.entries[m].entryId === data.editing.entryId) {
+      data.entries.splice(m, 1);
+      break;
+    }
+  }
+  var $liNodes = document.querySelectorAll('li');
+  for (var n = 0; n < $liNodes.length; n++) {
+    if ($liNodes[n].getAttribute('data-entry-id') === data.editing.entryId.toString()) {
+      $liNodes[n].remove();
+      break;
+    }
+  }
+  closeModal();
+  viewSwap('entries');
+}
+
+$deleteButton.addEventListener('click', openModal);
+$cancelButton.addEventListener('click', closeModal);
+$confirmButton.addEventListener('click', deleteFunction);
