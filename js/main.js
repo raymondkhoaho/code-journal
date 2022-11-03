@@ -2,13 +2,18 @@
 
 var $imageInput = document.querySelector('.photoUrl');
 var $imgView = document.querySelector('.images');
+var $textEdit = document.querySelector('#title');
+var $notesEdit = document.querySelector('#notes');
+var h1Text = document.querySelector('.entry-heading');
+var $ulParent = document.querySelector('.entry');
+var $newAnchor = document.querySelector('.new-button');
+var $entriesAnchor = document.querySelector('.entries-link');
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
-
 // Submit New/Edited Form Event
 
 var $submitForm = document.querySelector('.entry-form');
@@ -26,9 +31,6 @@ function submitEvent(event) {
     var newLi = renderEntry(formObject);
     newLi.setAttribute('data-entry-id', formObject.entryId);
     $ulParent.prepend(newLi);
-    $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $submitForm.reset();
-    viewSwap('entries');
   } else {
     formObject.entryId = data.editing.entryId;
     for (var k = 0; k < data.entries.length; k++) {
@@ -47,11 +49,11 @@ function submitEvent(event) {
         break;
       }
     }
-    $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $submitForm.reset();
-    viewSwap('entries');
-    data.editing = null;
   }
+  $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $submitForm.reset();
+  viewSwap('entries');
+  data.editing = null;
 }
 
 $submitForm.addEventListener('submit', submitEvent);
@@ -103,8 +105,6 @@ function renderEntry(entry) {
 
 // DOM Content Loaded Event: DOM Tree Loop and Reload Page
 
-var $ulParent = document.querySelector('.entry');
-
 function DOMContentLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var entry = renderEntry(data.entries[i]);
@@ -133,18 +133,22 @@ function viewSwap(showView) {
       $viewNodes[i].setAttribute('class', 'view container hidden');
     }
   }
+  data.editing = null;
   data.view = showView;
 }
 
-var $newAnchor = document.querySelector('.new-button');
-var $entriesAnchor = document.querySelector('.entries-link');
-
 function clickAnchor(event) {
+  $submitForm.reset();
   var viewSwapInput = event.target.getAttribute('data-view');
-  viewSwap(viewSwapInput);
+  data.editing = null;
   if (viewSwapInput === 'entry-form') {
     h1Text.textContent = 'New Entry';
+    $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $textEdit.setAttribute('value', '');
+    $imageInput.setAttribute('value', '');
+    $notesEdit.textContent = '';
   }
+  viewSwap(viewSwapInput);
 }
 
 $newAnchor.addEventListener('click', clickAnchor);
@@ -152,9 +156,8 @@ $entriesAnchor.addEventListener('click', clickAnchor);
 
 // View Pre-populated Edit Form
 
-var h1Text = document.querySelector('.entry-heading');
-
 function editClick(event) {
+  // debugger;
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
     h1Text.textContent = 'Edit Entry';
@@ -164,15 +167,13 @@ function editClick(event) {
   for (var j = 0; j < data.entries.length; j++) {
     if (data.entries[j].entryId.toString() === liEntryId) {
       data.editing = data.entries[j];
+      $imgView.setAttribute('src', data.editing.photoUrl);
+      $textEdit.setAttribute('value', data.editing.title);
+      $imageInput.setAttribute('value', data.editing.photoUrl);
+      $notesEdit.textContent = data.editing.notes;
       break;
     }
   }
-  var $textEdit = document.querySelector('#title');
-  var $notesEdit = document.querySelector('#notes');
-  $imgView.setAttribute('src', data.editing.photoUrl);
-  $textEdit.setAttribute('value', data.editing.title);
-  $imageInput.setAttribute('value', data.editing.photoUrl);
-  $notesEdit.textContent = data.editing.notes;
 }
 
 $ulParent.addEventListener('click', editClick);
