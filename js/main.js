@@ -1,4 +1,3 @@
-// Photo Preview function
 
 var $imageInput = document.querySelector('.photoUrl');
 var $imgView = document.querySelector('.images');
@@ -9,16 +8,20 @@ var $ulParent = document.querySelector('.entry');
 var $newAnchor = document.querySelector('.new-button');
 var $entriesAnchor = document.querySelector('.entries-link');
 var $deleteButton = document.querySelector('.delete-button');
-// var $confirmButton = document.querySelector('.confirm-button');
+var $confirmButton = document.querySelector('.confirm-button');
 var $cancelButton = document.querySelector('.cancel-button');
 var $modal = document.querySelector('.modal');
 var $overlay = document.querySelector('.overlay');
+var $liNodes = document.querySelectorAll('li');
+
+// Photo Preview function
 
 function photoUrlInput(event) {
   $imgView.setAttribute('src', $imageInput.value);
 }
 
 $imageInput.addEventListener('input', photoUrlInput);
+
 // Submit New/Edited Form Event
 
 var $submitForm = document.querySelector('.entry-form');
@@ -46,7 +49,7 @@ function submitEvent(event) {
         break;
       }
     }
-    var $liNodes = document.querySelectorAll('li');
+
     var replaceLi = renderEntry(formObject);
     for (var l = 0; l < $liNodes.length; l++) {
       if ($liNodes[l].getAttribute('data-entry-id') === formObject.entryId.toString()) {
@@ -180,7 +183,7 @@ function editClick(event) {
 
 $ulParent.addEventListener('click', editClick);
 
-// Delete Entry Function
+// Open/Close Delete Modal, Delete Entry Function
 
 function openModal(event) {
   $modal.setAttribute('class', 'modal');
@@ -192,5 +195,28 @@ function closeModal(event) {
   $overlay.setAttribute('class', 'overlay hidden');
 }
 
+function deleteFunction(event) {
+  for (var m = 0; m < data.entries.length; m++) {
+    if (data.entries[m].entryId === data.editing.entryId) {
+      data.entries.splice(m, 1);
+      break;
+    }
+  }
+  for (var n = 0; n < $liNodes.length; n++) {
+    if ($liNodes[n].getAttribute('data-entry-id') === data.editing.entryId) {
+      $liNodes[n].remove();
+    }
+  }
+  viewSwap('entries');
+  closeModal();
+  DOMContentLoaded();
+}
+
 $deleteButton.addEventListener('click', openModal);
 $cancelButton.addEventListener('click', closeModal);
+$confirmButton.addEventListener('click', deleteFunction);
+
+// for (var l = 0; l < $liNodes.length; l++) {
+//   if ($liNodes[l].getAttribute('data-entry-id') === formObject.entryId.toString()) {
+//     $liNodes[l].replaceWith(replaceLi);
+//     break;
