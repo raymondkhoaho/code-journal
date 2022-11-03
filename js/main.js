@@ -9,15 +9,13 @@ function photoUrlInput(event) {
 
 $imageInput.addEventListener('input', photoUrlInput);
 
-// Copy Submit Form Event
+// Submit New/Edited Form Event
 
 var $submitForm = document.querySelector('.entry-form');
 
 function submitEvent(event) {
-  //  debugger;
   var formObject = {};
   event.preventDefault();
-
   formObject.title = $submitForm.elements.title.value;
   formObject.photoUrl = $submitForm.elements['photo-url'].value;
   formObject.notes = $submitForm.elements.notes.value;
@@ -28,8 +26,10 @@ function submitEvent(event) {
     var newLi = renderEntry(formObject);
     newLi.setAttribute('data-entry-id', formObject.entryId);
     $ulParent.prepend(newLi);
+    $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $submitForm.reset();
+    viewSwap('entries');
   } else {
-    // debugger;
     formObject.entryId = data.editing.entryId;
     for (var k = 0; k < data.entries.length; k++) {
       if (data.entries[k].entryId === formObject.entryId) {
@@ -38,44 +38,23 @@ function submitEvent(event) {
         data.entries[k].notes = $submitForm.elements.notes.value;
         break;
       }
-    //  var replaceLi = renderEntry(formObject);
     }
+    var $liNodes = document.querySelectorAll('li');
+    var replaceLi = renderEntry(formObject);
+    for (var l = 0; l < $liNodes.length; l++) {
+      if ($liNodes[l].getAttribute('data-entry-id') === formObject.entryId.toString()) {
+        $liNodes[l].replaceWith(replaceLi);
+        break;
+      }
+    }
+    $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $submitForm.reset();
+    viewSwap('entries');
+    data.editing = null;
   }
-
-  $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $submitForm.reset();
-  viewSwap('entries');
-  data.editing = null;
 }
 
 $submitForm.addEventListener('submit', submitEvent);
-
-// Submit Form Event
-// var $submitForm = document.querySelector('.entry-form');
-
-// function submitEvent(event) {
-//   var formObject = {};
-
-//   event.preventDefault();
-
-//   formObject.title = $submitForm.elements.title.value;
-//   formObject.photoUrl = $submitForm.elements['photo-url'].value;
-//   formObject.notes = $submitForm.elements.notes.value;
-
-//   formObject.entryId = data.nextEntryId;
-//   data.nextEntryId++;
-//   data.entries.unshift(formObject);
-
-//   $imgView.setAttribute('src', 'images/placeholder-image-square.jpg');
-//   $submitForm.reset();
-//   var newLi = renderEntry(formObject);
-//   newLi.setAttribute('data-entry-id', formObject.entryId);
-//   $ulParent.prepend(newLi);
-//   viewSwap('entries');
-//   data.editing = null;
-// }
-
-// $submitForm.addEventListener('submit', submitEvent);
 
 // Create DOM Tree Function
 
@@ -195,4 +174,5 @@ function editClick(event) {
   $imageInput.setAttribute('value', data.editing.photoUrl);
   $notesEdit.textContent = data.editing.notes;
 }
+
 $ulParent.addEventListener('click', editClick);
